@@ -2,5 +2,16 @@
     "require": {
         "monolog/monolog": "1.7.0",
         "symfony/console": "v2.4.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
     }
 }
