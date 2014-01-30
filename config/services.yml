@@ -1,0 +1,3 @@
+services:
+    logagent.manager.runner:
+        class: LogAgent\Manager\Runner

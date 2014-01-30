@@ -12,24 +12,32 @@ class Application extends BaseApplication
     const NAME = 'LogAgent';
     const VERSION = '1.0';
 
+    private $container;
+
     public function __construct()
     {
         parent::__construct(static::NAME, static::VERSION);
 
-        $container = new ContainerBuilder();
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $this->container = new ContainerBuilder();
+        $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('commands.yml');
+        $loader->load('services.yml');
 
-        $this->initializeCommands($container);
+        $this->initializeCommands();
     }
 
-    private function initializeCommands(ContainerBuilder $container)
+    private function initializeCommands()
     {
-        $commands = $container->findTaggedServiceIds('logagent.command');
+        $commands = $this->container->findTaggedServiceIds('logagent.command');
 
         foreach ($commands as $id => $attributes) {
-            $command = $container->get($id);
+            $command = $this->container->get($id);
             $this->add($command);
         }
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
     }
 }

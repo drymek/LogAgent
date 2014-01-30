@@ -1,5 +1,5 @@
 services:
-    logagent.agent.run:
+    logagent.command.agent.run:
         class: LogAgent\Command\AgentRunCommand
         tags:
             - { name: logagent.command }
