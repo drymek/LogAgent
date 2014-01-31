@@ -1,0 +1,4 @@
+collectors:
+    cpu:
+        class: LogAgent\Collectors\Cpu
+
