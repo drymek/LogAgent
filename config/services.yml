@@ -1,3 +1,5 @@
 services:
     logagent.manager.runner:
         class: LogAgent\Manager\Runner
+        calls:
+            - [ setConfiguration, [ %logagent.config% ] ]

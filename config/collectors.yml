@@ -1,4 +1,3 @@
 collectors:
-    cpu:
-        class: LogAgent\Collectors\Cpu
+    cpu: LogAgent\Collectors\Cpu
 
