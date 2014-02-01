@@ -1,3 +1,7 @@
 collectors:
-    cpu: LogAgent\Collectors\Cpu
+    diskspace1: 
+        class: LogAgent\Collectors\DiskSpace
+        devices: 
+            - /dev/simfs
+
 

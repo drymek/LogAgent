@@ -11,14 +11,18 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('collectors');
+        $rootNode = $treeBuilder->root('collectors')->useAttributeAsKey('', false);
 
         $rootNode
             ->children()
-                ->scalarNode('cpu')
+                ->arrayNode('devices')
+                    
                 ->end()
-            ->end()
-            ;
+                ->scalarNode('class')
+                    ->isRequired()->cannotBeEmpty()
+                ->end()
+            ->end();
+        ;
         return $treeBuilder;
     }
 }
