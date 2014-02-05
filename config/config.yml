@@ -1,0 +1,4 @@
+collectors:
+    disk_space: 
+        devices: 
+            - /dev/simfs

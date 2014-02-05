@@ -29,6 +29,8 @@ class Application extends BaseApplication
         $loader->load('commands.yml');
         $loader->load('services.yml');
         $loader->load('collectors.yml');
+        $loader->load('config.yml');
+
         $this->container->compile();
 
         $this->initializeCommands();

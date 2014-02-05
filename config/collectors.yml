@@ -1,6 +1,6 @@
-collectors:
-    disk_space: 
-        devices: 
-            - /dev/simfs
-
+services:
+    logagent.collector.diskspace:
+        class: LogAgent\Collector\DiskSpace
+        tags:
+            - { name: logagent.collector }
 

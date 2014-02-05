@@ -2,12 +2,10 @@
 
 namespace LogAgent\Manager;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use LogAgent\Factory\Collectors;
 
 class Runner
 {
-    private $config;
-    private $container;
     private $factory;
 
     public function run()
@@ -15,14 +13,14 @@ class Runner
         $collectors = $this->factory->build();
         $results = array();
 
-        foreach ($collectors as $name => $collector) {
-            $results[$name] = $collector->execute();
+        foreach ($collectors as $collector) {
+            $results[$collector->getAlias()] = $collector->execute();
         }
 
         return $results;
     }
 
-    public function setCollectorFactory(CollectorFactory $factory)
+    public function setCollectorsFactory(Collectors $factory)
     {
         $this->factory = $factory;
     }
