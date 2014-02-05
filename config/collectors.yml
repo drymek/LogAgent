@@ -1,6 +1,5 @@
 collectors:
-    diskspace1: 
-        class: LogAgent\Collectors\DiskSpace
+    disk_space: 
         devices: 
             - /dev/simfs
 

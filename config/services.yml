@@ -2,4 +2,9 @@ services:
     logagent.manager.runner:
         class: LogAgent\Manager\Runner
         calls:
+            - [ setContainer, [ @service_container ] ]
+
+    logagent.factory.collectors:
+        class: LogAgent\Factory\Collectors
+        calls:
             - [ setConfiguration, [ %logagent.config% ] ]

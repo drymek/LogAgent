@@ -16,6 +16,12 @@ class AgentRunCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $runner = $this->getContainer()->get('logagent.manager.runner');
-        $runner->run();
+        $results = $runner->run();
+
+        if (!$this->getOption('daemon')) {
+            foreach ($results as $name => $result) {
+                $output->writeln($result);
+            }
+        }
     }
 }

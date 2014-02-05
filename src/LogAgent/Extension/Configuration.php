@@ -11,15 +11,18 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('collectors')->useAttributeAsKey('', false);
+        $rootNode = $treeBuilder->root('collectors');
 
         $rootNode
             ->children()
-                ->arrayNode('devices')
-                    
-                ->end()
-                ->scalarNode('class')
-                    ->isRequired()->cannotBeEmpty()
+                ->arrayNode('disk_space')
+                    ->children()
+                        ->arrayNode('devices')
+                            ->requiresAtLeastOneElement()
+                                ->prototype('scalar')->end()
+                            ->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
         ;

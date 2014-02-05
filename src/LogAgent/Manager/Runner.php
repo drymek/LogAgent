@@ -2,14 +2,28 @@
 
 namespace LogAgent\Manager;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class Runner
 {
+    private $config;
+    private $container;
+    private $factory;
+
     public function run()
     {
+        $collectors = $this->factory->build();
+        $results = array();
+
+        foreach ($collectors as $name => $collector) {
+            $results[$name] = $collector->execute();
+        }
+
+        return $results;
     }
 
-    public function setConfiguration(array $config)
+    public function setCollectorFactory(CollectorFactory $factory)
     {
-        var_dump($config); die;
+        $this->factory = $factory;
     }
 }
