@@ -1,6 +1,8 @@
 services:
     logagent.collector.diskspace:
         class: LogAgent\Collector\DiskSpace
+        arguments:
+            - @logagent.builder.process
         tags:
             - { name: logagent.collector }
 

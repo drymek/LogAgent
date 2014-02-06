@@ -9,3 +9,6 @@ services:
         arguments:
             - %logagent.config%
             - @service_container
+
+    logagent.builder.process:
+        class: Symfony\Component\Process\ProcessBuilder
