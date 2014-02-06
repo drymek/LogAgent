@@ -16,11 +16,10 @@ class DiskSpaceSpec extends ObjectBehavior
         $builder->setPrefix('df')->willReturn($builder);
         $builder->getProcess()->willReturn($process);
         $this->beConstructedWith($builder);
-
-        $this->process = $process;
+        $this->configure(array('devices'=>array('/dev/sda1')));    
     }
 
-    function it_is_initializable()
+    function it_is_a_collector()
     {
         $this->shouldHaveType('LogAgent\Collector\CollectorInterface');
     }
@@ -30,17 +29,16 @@ class DiskSpaceSpec extends ObjectBehavior
         $this->getAlias()->shouldReturn('disk_space');
     }
 
-    function it_returns_disk_usage_in_string_format()
+    function it_returns_disk_usage_in_string_format(Process $process)
     {
         $data = 
             "System plików                       1K-bl    użyte  dostępne %uż. zamont. na\n".
             "/dev/sda1                        40636768  1819200  36730300   5% /\n";
 
-        $this->process->run()->shouldBeCalled();
-        $this->process->isSuccessful()->willReturn(true);
-        $this->process->getOutput()->willReturn($data);
+        $process->run()->shouldBeCalled();
+        $process->isSuccessful()->willReturn(true);
+        $process->getOutput()->willReturn($data);
 
-        $this->configure(array('devices'=>array('/dev/sda1')));    
         $this->execute()->shouldReturn("/dev/sda1|1819200|36730300|/\n");
     }
 }
