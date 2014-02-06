@@ -24,7 +24,7 @@ class AgentRunCommandSpec extends ObjectBehavior
     function it_runs_manager(ContainerInterface $container, Runner $runner, InputInterface $input, OutputInterface $output)
     {
         $container->get('logagent.manager.runner')->willReturn($runner);
-        $runner->run()->shouldBeCalled();
+        $runner->run()->willReturn(array());
         $this->setContainer($container);
         $this->run($input, $output);
     }
