@@ -12,7 +12,7 @@ class CollectorsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
+        $configuration = new CollectorsConfiguration();
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $configs);
         
