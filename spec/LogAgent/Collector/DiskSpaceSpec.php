@@ -24,12 +24,12 @@ class DiskSpaceSpec extends ObjectBehavior
         $this->shouldHaveType('LogAgent\Collector\CollectorInterface');
     }
 
-    function it_has_alias()
+    function it_should_has_alias()
     {
         $this->getAlias()->shouldReturn('disk_space');
     }
 
-    function it_returns_disk_usage_in_string_format(Process $process)
+    function it_should_returns_disk_usage_in_string_format(Process $process)
     {
         $data = 
             "System plików                       1K-bl    użyte  dostępne %uż. zamont. na\n".

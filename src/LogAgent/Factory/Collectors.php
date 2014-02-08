@@ -16,7 +16,6 @@ class Collectors
     {
         $this->config = $config;
         $this->container = $container;
-        $this->configuredCollectors = array();
     }
 
     public function build()
@@ -35,20 +34,23 @@ class Collectors
 
     private function findCollectorByName($name)
     {
-        if (null === $this->availableCollectors) {
-            $this->availableCollectors = $this->container->findTaggedServiceIds('logagent.collector');
-        }
-
-        foreach ($this->availableCollectors as $id => $attributes) {
+        foreach ($this->getAvailableCollectors() as $id => $attributes) {
             $collector = $this->container->get($id);
 
             if (!$collector instanceof CollectorInterface) {
-                throw new ConfigurationException(sprintf('Collector for "%s" is not instance of CollectorInterface', $name));
+                throw new ConfigurationException(sprintf('Collector for "%s" is not an instance of CollectorInterface', $name));
             }
 
             if ($name === $collector->getAlias()) {
                 return $collector;
             }
         }
+
+        throw new ConfigurationException(sprintf('Could not find collector for "%s"', $name));
+    }
+
+    private function getAvailableCollectors()
+    {
+        return $this->container->findTaggedServiceIds('logagent.collector');
     }
 }
