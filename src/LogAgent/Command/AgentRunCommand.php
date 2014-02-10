@@ -26,5 +26,11 @@ class AgentRunCommand extends ContainerAwareCommand
                 $output->writeln(sprintf('<info>%s</info> %s', $name, $result));
             }
         }
+
+        $logger = $this->getContainer()->get('logger');
+
+        foreach ($results as $name => $result) {
+            $logger->err($result);
+        }
     }
 }

@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use LogAgent\Extension\CollectorsExtension;
+use LogAgent\Extension\OutputExtension;
 
 class Application extends BaseApplication
 {
@@ -22,9 +23,17 @@ class Application extends BaseApplication
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__.'/../../config'));
 
-        $extension = new CollectorsExtension();
-        $this->container->registerExtension($extension);
-        $this->container->loadFromExtension($extension->getAlias());
+        $outputExtension = new OutputExtension();
+        $outputExtension->build($this->container);
+        $extensions = array(
+            new CollectorsExtension(),
+            $outputExtension,
+        );
+
+        foreach ($extensions as $extension) {
+            $this->container->registerExtension($extension);
+            $this->container->loadFromExtension($extension->getAlias());
+        }
 
         $loader->load('commands.yml');
         $loader->load('services.yml');

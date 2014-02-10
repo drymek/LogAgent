@@ -4,10 +4,12 @@
         "symfony/console": "v2.4.1",
         "symfony/dependency-injection": "2.4.1",
         "symfony/config": "2.4.1",
-        "symfony/process": "v2.4.1"
+        "symfony/process": "v2.4.1",
+        "mlehner/gelf-php": "v1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev"
+        "phpspec/phpspec": "2.0.*@dev",
+        "symfony/monolog-bundle": "v2.5.0"
     },
     "config": {
         "bin-dir": "bin"
