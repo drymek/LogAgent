@@ -2,20 +2,13 @@ collectors:
     disk_space: 
         devices: 
             - /dev/simfs
-monolog: 
+
+output: 
     handlers:
         graylog2:
             type: gelf
             publisher:
                hostname: 192.168.1.98
-               port: 12203
+               port: 12000
                chunk_size: 1024
             level: warning
-        console:
-            type:                console
-            verbosity_levels:
-                VERBOSITY_NORMAL:       WARNING
-                VERBOSITY_VERBOSE:      NOTICE
-                VERBOSITY_VERY_VERBOSE: INFO
-                VERBOSITY_DEBUG:        DEBUG
-

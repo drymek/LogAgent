@@ -17,7 +17,7 @@ class OutputExtension extends MonologExtension
 {
     public function getAlias()
     {
-        return 'monolog';
+        return 'output';
     }
 
     public function getConfiguration(array $config, \Symfony\Component\DependencyInjection\ContainerBuilder $container)
