@@ -38,7 +38,13 @@ class Application extends BaseApplication
         $loader->load('commands.yml');
         $loader->load('services.yml');
         $loader->load('collectors.yml');
-        $loader->load('config.yml');
+
+        try {
+            $loader->load('config.yml');
+        } catch (\InvalidArgumentException $e) {
+            echo "Can not find configuration file (config/config.yml). If this is the first use of the application, copy the config/config.yml.dist to config/config.yml and adjust it to your needs\n";
+            exit ;
+        }
 
         $this->container->compile();
 
