@@ -14,7 +14,11 @@ class Runner
         $results = array();
 
         foreach ($collectors as $collector) {
-            $results[$collector->getAlias()] = $collector->execute();
+            $result = $collector->execute();
+            $name = $collector->getAlias();
+
+            $results[$name] = $result;
+            $this->log($name, $result);
         }
 
         return $results;
@@ -23,5 +27,15 @@ class Runner
     public function setCollectorsFactory(Collectors $factory)
     {
         $this->factory = $factory;
+    }
+
+    public function setLogger($logger) 
+    {
+        $this->logger = $logger;
+    }
+
+    private function log($name, $result) 
+    {
+        $this->logger->err($name . '|'. $result);
     }
 }

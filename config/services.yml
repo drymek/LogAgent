@@ -3,6 +3,7 @@ services:
         class: LogAgent\Manager\Runner
         calls:
             - [ setCollectorsFactory, [ @logagent.factory.collectors ] ]
+            - [ setLogger, [ @logger ] ] 
 
     logagent.factory.collectors:
         class: LogAgent\Factory\Collectors

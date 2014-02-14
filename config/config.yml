@@ -2,5 +2,13 @@ collectors:
     disk_space: 
         devices: 
             - /dev/simfs
-#output:
 
+output: 
+    handlers:
+        graylog2:
+            type: gelf
+            publisher:
+               hostname: 192.168.1.98
+               port: 12000
+               chunk_size: 1024
+            level: warning
