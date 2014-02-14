@@ -3,7 +3,8 @@
         "monolog/monolog": "1.7.0",
         "symfony/console": "v2.4.1",
         "symfony/dependency-injection": "2.4.1",
-        "symfony/config": "2.4.1"
+        "symfony/config": "2.4.1",
+        "symfony/process": "v2.4.1"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev"

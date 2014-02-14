@@ -1,0 +1,14 @@
+services:
+    logagent.manager.runner:
+        class: LogAgent\Manager\Runner
+        calls:
+            - [ setCollectorsFactory, [ @logagent.factory.collectors ] ]
+
+    logagent.factory.collectors:
+        class: LogAgent\Factory\Collectors
+        arguments:
+            - %logagent.config%
+            - @service_container
+
+    logagent.builder.process:
+        class: Symfony\Component\Process\ProcessBuilder
